@@ -169,7 +169,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!212 &142504659
 SpriteRenderer:
@@ -245,6 +245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccded5c6957c15949bf59f40bbcd173e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upForce: 10
+  downForce: 10
 --- !u!199 &142504662
 ParticleSystemRenderer:
   serializedVersion: 6

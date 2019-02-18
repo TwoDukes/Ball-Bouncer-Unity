@@ -1,20 +1,13 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField]
+    private float upForce, downForce;
 
     private Rigidbody2D rb2d;
-    private bool OnGround = true;
-
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        OnGround = true;
-    }
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-         OnGround = false;
-    }
+    private bool OnGround = false, canDrop = true;
 
     void Start()
     {
@@ -23,17 +16,31 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-
         if(Input.GetKeyDown(KeyCode.Space)){
             if (OnGround)
             {
-                rb2d.AddForce(new Vector2(0, 10), ForceMode2D.Impulse);
+                rb2d.AddForce(new Vector2(0, upForce), ForceMode2D.Impulse);
+                canDrop = true;
             }
             else
             {
-                rb2d.AddForce(new Vector2(0, -20), ForceMode2D.Impulse);
+                if (canDrop)
+                {
+                    rb2d.AddForce(new Vector2(0, -downForce), ForceMode2D.Impulse);
+                    canDrop = false;
+                }
             }
         }
+    }
 
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        OnGround = true;
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        OnGround = false;
     }
 }
